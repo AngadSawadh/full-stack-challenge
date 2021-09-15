@@ -1,60 +1,57 @@
 import React from "react";
-
-const Part = (props) => {
-  return (
-    <p>{props.part.name} {props.part.exercise}</p>
-  )
-}
-
-const Header = (props) => {
-  return (
-    <h1>{props.course}</h1>
-  )
-}
-
-const Content = (props) => {
-  const content = props.parts.map(value => <Part part={value}/>);
-  return (
-    <div>
-      {content}
-    </div>
-  )
-}
-
-const Total = (props) => {
-  let sum = 0;
-  props.parts.forEach(value => {
-    sum+=value.exercise;
-  })
-  return (
-    <p>Number of Exercises:{sum}</p>
-  )
-}
+import Course from "./components/Course";
 
 const App = () => {
-  const course = {
-    name:'Half Stack application development',
-    parts:[
-      {
-        name:'Fundamentals of React',
-        exercise:10
-      },
-      {
-        name:'Using props to pass data',
-        exercise:7
-      },
-      {
-        name:'State of a components',
-        exercise:14
-      }
-    ]
-  }
+  const courses = [
+    {
+      id:1,
+      name:'Half Stack application development',
+      parts:[
+        {
+          name:'Fundamentals of React',
+          exercise:10,
+          id: 1
+        },
+        {
+          name:'Using props to pass data',
+          exercise:7,
+          id:2
+        },
+        {
+          name:'State of a components',
+          exercise:14,
+          id:3
+        },
+        {
+          name:'Redux',
+          exercises:11,
+          id:4
+        }
+      ]
+    },
+    {
+      id: 2,
+      name:'Node.js',
+      parts:[
+        {
+          name:'Routing',
+          exercise: 3,
+          id:1
+        },
+        {
+          name:'Middlewares',
+          exercise: 7,
+          id:2
+        }
+      ]
+    }
+  ]
+
+  const course = courses.map(value=><Course key={value.id} course={value}/>);
   return (
-    <div>
-      <Header course={course.name}/>
-      <Content parts={course.parts}/>
-      <Total parts={course.parts}/>
-    </div>
+    <>
+      {course}
+    </>
   )
 }
 
